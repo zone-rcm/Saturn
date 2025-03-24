@@ -1,49 +1,36 @@
 import requests
-import time
 
-# Replace with your actual bot token
-BOT_TOKEN = "1355028807:PUU8dvVl7HqnqdSaIzjYXLI5NwxpbOdrQPm7DFWS"
-BASE_URL = f"https://tapi.bale.ai/bot{BOT_TOKEN}"
-LAST_UPDATE_ID = 0
+# Replace with your bot's token
+TOKEN = '1355028807:PUU8dvVl7HqnqdSaIzjYXLI5NwxpbOdrQPm7DFWS'
 
+# Base URL for the Telegram Bot API
+BASE_URL = f'https://tapi.bale.ai/bot{TOKEN}/'
+
+# Function to get updates
 def get_updates():
-    global LAST_UPDATE_ID
-    try:
-        response = requests.get(
-            f"{BASE_URL}/getUpdates",
-            params={"offset": LAST_UPDATE_ID + 1, "timeout": 30},
-            timeout=35  # Slightly longer than the long polling timeout
-        )
-        response.raise_for_status()
-        updates = response.json().get("result", [])
-        
-        if updates:
-            LAST_UPDATE_ID = updates[-1]["update_id"]
-            process_updates(updates)
-            
-    except requests.exceptions.RequestException as e:
-        print(f"Error getting updates: {e}")
-        time.sleep(5)  # Wait before retrying
+    url = BASE_URL + 'getUpdates'
+    response = requests.get(url)
+    return response.json()
 
-def process_updates(updates):
-    for update in updates:
-        if "message" in update and "text" in update["message"]:
-            chat_id = update["message"]["chat"]["id"]
-            text = update["message"]["text"]
-            
-            if text == "/start":
-                send_message(chat_id, "Hi!")
-
+# Function to send a message
 def send_message(chat_id, text):
-    try:
-        requests.post(
-            f"{BASE_URL}/sendMessage",
-            json={"chat_id": chat_id, "text": text}
-        )
-    except requests.exceptions.RequestException as e:
-        print(f"Error sending message: {e}")
+    url = BASE_URL + 'sendMessage'
+    params = {'chat_id': chat_id, 'text': text}
+    response = requests.get(url, params=params)
+    return response.json()
 
-if __name__ == "__main__":
-    print("Bot is running...")
-    while True:
-        get_updates()
+# Main function to process updates
+def main():
+    updates = get_updates()
+    
+    for update in updates['result']:
+        message = update['message']
+        chat_id = message['chat']['id']
+        text = message['text']
+        
+        # Check if the message is the /start command
+        if text == '/start':
+            send_message(chat_id, 'Hi')
+
+if __name__ == '__main__':
+    main()
