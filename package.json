@@ -1,0 +1,27 @@
+{
+  "name": "telegram-feedback-bot",
+  "version": "1.0.0",
+  "description": "A Persian Telegram feedback bot using Axios with long polling",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "feedback",
+    "persian",
+    "axios"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "moment": "^2.29.4",
+    "moment-jalaali": "^0.9.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
