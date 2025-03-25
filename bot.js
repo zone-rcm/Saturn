@@ -2,9 +2,9 @@ const axios = require('axios');
 const moment = require('moment-jalaali');
 
 // Configuration - replace these values with your actual data
-const BOT_TOKEN = '1355028807:TcPZyWc3GHRjCuJjAzLDR8SnJVrnmRVltA3FpFtY';
+const BOT_TOKEN = 'YOUR_BOT_TOKEN'; // Replace with your actual bot token
 const API_URL = `https://tapi.bale.ai/bot${BOT_TOKEN}`;
-const ADMIN_IDS = [1085839779, 844843541]; // جایگزین کنید با آی دی ادمین های واقعی
+const ADMIN_IDS = [1085839779, 844843541]; // Replace with your actual admin IDs
 const USER_FEEDBACK_LIMIT = {};
 const POLLING_INTERVAL = 3000; // 3 seconds
 
